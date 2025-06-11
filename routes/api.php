@@ -22,6 +22,14 @@ use App\Http\Controllers\API\GameAccountController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+// --- Rute Publik Tambahan untuk Web Frontend ---
+Route::get('/top-players', [GameAccountController::class, 'topPlayers']);
+
+// Packages
+Route::get('/packages', [DiamondPackageController::class, 'index']);
+
+// Game Account Check
+Route::post('/check-game-account', [GameAccountController::class, 'check']);
 
 // --- Rute yang Memerlukan Otentikasi Token (Harus login) ---
 Route::middleware('auth:sanctum')->group(function () {
@@ -36,10 +44,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/transactions', [TransactionController::class, 'index']);
     Route::post('/transactions', [TransactionController::class, 'store']);
     Route::get('/transactions/{id}', [TransactionController::class, 'show']);
-
-    // Packages
-    Route::get('/packages', [DiamondPackageController::class, 'index']);
-
-    // Game Account Check
-    Route::post('/check-game-account', [GameAccountController::class, 'check']);
 });

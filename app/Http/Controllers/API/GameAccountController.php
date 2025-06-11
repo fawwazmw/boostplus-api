@@ -35,4 +35,14 @@ class GameAccountController extends Controller
             'message' => 'Akun tidak ditemukan.',
         ], 404);
     }
+
+    public function topPlayers()
+    {
+        $accounts = GameAccount::latest()->take(10)->get();
+        // Anda bisa membuat Resource khusus jika ingin, tapi untuk sekarang response langsung sudah cukup.
+        return response()->json([
+            'success' => true,
+            'data' => $accounts
+        ]);
+    }
 }
